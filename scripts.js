@@ -1,18 +1,42 @@
+function arr_diff (a1, a2) {
+
+    var a = [], diff = [];
+
+    for (var i = 0; i < a1.length; i++) {
+        a[a1[i]] = true;
+    }
+
+    for (var i = 0; i < a2.length; i++) {
+        if (a[a2[i]]) {
+            delete a[a2[i]];
+        } else {
+            a[a2[i]] = true;
+        }
+    }
+
+    for (var k in a) {
+        diff.push(k);
+    }
+
+    return diff;
+};
+
+
 var current_pieces = ["body", "bow", "sole", "trim", "toecap"];
 
-var previousPieces = ["bow", "toecap"];
-var newChoicePieces = [];
+var previousPieces = [];
+var newChoicePieces = ["body"];
 
-var toRemove = _.difference(previousPieces, newChoicePieces);
+var toRemove = arr_diff(previousPieces, newChoicePieces);
 
 console.log('To remove: ');
 console.log(toRemove);
 
-var toAdd = _.difference(newChoicePieces, previousPieces);
+var toAdd = arr_diff(newChoicePieces, previousPieces);
 console.log('To add: ');
 console.log(toAdd);
 
-current_pieces = _.difference(current_pieces, toRemove);
+current_pieces = arr_diff(current_pieces, toRemove);
 
 console.log('CurrentPieces without removed: ');
 console.log(current_pieces);
@@ -25,16 +49,16 @@ console.log(current_pieces);
 previousPieces = ['body'];
 newChoicePieces = ["duo-color-front", "duo-color-back"];
 
-toRemove = _.difference(previousPieces, newChoicePieces);
+toRemove = arr_diff(previousPieces, newChoicePieces);
 
 console.log('To remove: ');
 console.log(toRemove);
 
-toAdd = _.difference(newChoicePieces, previousPieces);
+toAdd = arr_diff(newChoicePieces, previousPieces);
 console.log('To add: ');
 console.log(toAdd);
 
-current_pieces = _.difference(current_pieces, toRemove);
+current_pieces = arr_diff(current_pieces, toRemove);
 
 console.log('CurrentPieces without removed: ');
 console.log(current_pieces);
